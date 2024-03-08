@@ -31,7 +31,7 @@ systemctl enable glusterd
 systemctl status glusterd
 ```
 
-![GlusterFS-status](GlusterFS-status.jpg)
+![GlusterFS-status](assets/GlusterFS-status.jpg)
 
 
 ## Update 
@@ -46,7 +46,7 @@ vim /etc/hosts
 192.168.211.103 node3
 ```
 
-![etc-hosts](etc-hosts.jpg)
+![etc-hosts](assets/etc-hosts.jpg)
 
 ## Create GlusterFS Storage
 
@@ -67,7 +67,7 @@ mount -a
 df -h
 ```
 
-![mounted-lvms](mounted-lvms.jpg)
+![mounted-lvms](assets/mounted-lvms.jpg)
 
 ## Configure GlusterFS Volume
 
@@ -79,14 +79,14 @@ gluster peer probe node2
 gluster peer status
 ```
 
-![gluster-peer-status](gluster-peer-status.jpg)
+![gluster-peer-status](assets/gluster-peer-status.jpg)
 
 To verify the added storage pool with the following command:
 
 ```bash
 gluster pool list
 ```
-![gluster-pool-list](gluster-pool-list.jpg)
+![gluster-pool-list](assets/gluster-pool-list.jpg)
 
 ## Setup volumes
 
@@ -104,7 +104,7 @@ gluster volume start vol1
 gluster volume status
 ```
 
-![gluster-volume](gluster-volume.jpg)
+![gluster-volume](assets/gluster-volume.jpg)
 
 ## Mounting GlusterFS on Clients
 
@@ -127,7 +127,7 @@ vim /mnt/vol1/file1.txt
 Hello World!
 ```
 
-![gluster-test](gluster-test.jpg)
+![gluster-test](assets/gluster-test.jpg)
 
 ## Source of content
 
