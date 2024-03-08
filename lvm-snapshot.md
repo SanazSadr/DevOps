@@ -25,7 +25,7 @@ tmpfs                         388M  4.0K  388M   1% /run/user/1000
 
 Create files in your LV to restore them from snapshot later
 
-![create-files](create-files.png)
+![create-files](assets/create-files.png)
 
 ## Creating LVM Snapshots using lvcreate
 
@@ -39,11 +39,11 @@ lvcreate -s -n 20240222_sdb1_snapshot -L 20M vg-ssd/lvdisk22
 > You will also have to make sure that you have enough remaining space in the volume group as the snapshot will be created in the same volume group by default.<br>
 > You won’t be able to create snapshot names having “snapshot” in the name as it is a reserved keyword. The origin name should include the volume group.
 
-![lvcreate](lvcreate.png)
+![lvcreate](assets/lvcreate.png)
 
 Now to see your snapshot run the `lvs`
 
-![lvs-snapshot](lvs-snapshot.png)
+![lvs-snapshot](assets/lvs-snapshot.png)
 
 As you can see, the logical volume has a set of different attributes compared to the original logical volume :
 
@@ -69,13 +69,13 @@ mount /dev/vg-ssd/20240222_sdb1_snapshot /data_snapshot
 lsblk
 ```
 
-![lsblk-snapshot](lsblk-snapshot.png)
+![lsblk-snapshot](assets/lsblk-snapshot.png)
 
 ## Restoring LVM Snapshots
 
 First remove the created files
 
-![remove-files](remove-files.png)
+![remove-files](assets/remove-files.png)
 
 Now that your LVM is backed up, you will be able to restore it on your local system.
 
@@ -89,11 +89,11 @@ lvconvert --mergesnapshot /dev/vg-ssd/20240222_sdb1_snapshot
 lvchange --refresh vg-ssd/lvdisk22
 ```
 
-![lvconvert](lvconvert.png)
+![lvconvert](assets/lvconvert.png)
 
 Now to see your files restored from the snapshot first run `reboot` command, and then `ls /data_sdb1`
 
-![restored-files](restored-files.png)
+![restored-files](assets/restored-files.png)
 
 Be happy that you have the files that you have lost :)
 
