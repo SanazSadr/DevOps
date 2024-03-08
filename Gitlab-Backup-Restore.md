@@ -4,7 +4,7 @@
 
 The first step is to create a reository on gitlab before creating a backup.
 
-![create-repo](create-repo.png)
+![create-repo](assets/create-repo.png)
 
 ## Create backup
 
@@ -29,7 +29,7 @@ Before restoring the backup file, to check whether the backup file is ok or not,
 
 In this case I added two new files to my repository and deleted the first file that I've added in the first step.
 
-![change-repo](change-repo.png)
+![change-repo](assets/change-repo.png)
 
 ## Restore backup
 
@@ -48,7 +48,7 @@ gitlab-ctl stop sidekiq
 gitlab-ctl status
 ```
 
-![gitlab-ctl-status](gitlab-ctl-status.png)
+![gitlab-ctl-status](assets/gitlab-ctl-status.png)
 
 Next, restore the backup, specifying the ID of the backup you wish to restore:
 
@@ -57,7 +57,7 @@ Next, restore the backup, specifying the ID of the backup you wish to restore:
 # NOTE: "_gitlab_backup.tar" is omitted from the name
 gitlab-backup restore BACKUP=1708372789_2024_02_19_16.2.3
 ```
-![gitlab-backup-restore](gitlab-backup-restore.png)
+![gitlab-backup-restore](assets/gitlab-backup-restore.png)
 
 Next, restart and check GitLab:
 
@@ -66,11 +66,11 @@ gitlab-ctl restart
 gitlab-rake gitlab:check SANITIZE=true
 ```
 
-![gitlab-ctl-status](gitlab-ctl-restart.png)
+![gitlab-ctl-status](assets/gitlab-ctl-restart.png)
 
 Now it is time to check your gitlab, to see if your back is restores successfully to the thing you wanted or not.
 
-![repo-after-restore](repo-after-restore.png)
+![repo-after-restore](assets/repo-after-restore.png)
 
 ## Source of content
 
