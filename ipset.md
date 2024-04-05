@@ -53,7 +53,7 @@ ipset –e OLDNAME NEWNAME
 ipset –e test-list new-list
 ```
 
-![ipset-lists](ipset-lists.jpg)
+![ipset-lists](/assets/ipset-lists.jpg)
 
 Now when we have a list created, manually or it fills the script using ipset and iptables for example, it is very convenient to deny access to the server to all addresses that are in the list or allow access to everyone except the addresses in the list:
 

@@ -6,13 +6,13 @@ Network address translation (NAT) is a method of remapping one IP address space 
 
 In this article, we are going to configure P-NAT. Port Network Address Translation or P-NAT, uses a single outside public address and maps multiple inside addresses to it using different port numbers. It is mainly used for Internet connection sharing on a private IP address space.
 
-![NAT-router](private-network-NAT-router.jpg)
+![NAT-router](/assets/private-network-NAT-router.jpg)
 
 ## Set Static IP Address
 
 At first add one network interface of type "VMnet0" to your server, then:
 
-![server](private-network-server.jpg)
+![server](/assets/private-network-server.jpg)
 
 ```bash
 vim /etc/netplan/00-installer-config.yaml
@@ -64,7 +64,7 @@ apt install iptables-persistent
 
 On your client server, you just need one network interface of type "VMnet0"
 
-![client](private-network-client.jpg)
+![client](/assets/private-network-client.jpg)
 
 ```bash
 vim /etc/netplan/00-installer-config.yaml
@@ -84,7 +84,7 @@ netplan try
 ping google.com
 ```
 
-![ping-google](private-network-ping-google.jpg)
+![ping-google](/assets/private-network-ping-google.jpg)
 
 ## Source of content
 
