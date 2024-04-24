@@ -1,0 +1,65 @@
+---
+- name: Install MongoDB
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache
+      debug:
+        msg: Update apt
+      notify: apt update
+
+    - name: Check that the GPG Key exists
+      stat:
+        path: /etc/apt/trusted.gpg.d/mongodb-6.gpg
+      register: key_stat_result
+
+    - name: Import public GPG Key
+      # ansible.builtin.apt_key:
+      #   url: https://www.mongodb.org/static/pgp/server-6.0.asc
+      #   state: present
+      shell:
+        cmd: curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb-6.gpg
+      when: not key_stat_result.stat.exists
+
+    - name: Check that the repository exists
+      stat:
+        path: /etc/apt/sources.list.d/mongodb-org-6.0.list
+      register: repo_stat_result
+
+    - name: Add repository
+      # ansible.builtin.apt_repository:
+      #   repo: deb https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse
+      #   state: present
+      shell:
+        cmd: echo "deb https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+      notify: apt update
+      when: not repo_stat_result.stat.exists
+
+    - name: Install MongoDB packages
+      ansible.builtin.apt:
+        name: mongodb-org
+        state: present
+
+    - name: Start MongoDB
+      ansible.builtin.service:
+        name: mongod
+        state: started
+        enabled: yes
+
+    - name: Installation finished
+      debug:
+        msg: MongoDB installed
+
+    - name: Get MongoDB version
+      shell:
+        cmd: mongod --version
+      register: mongodb_version
+
+    - name: Display MongoDB version
+      debug:
+        msg: "The MongoDB version is {{ mongodb_version.stdout }}"
+
+  handlers:
+    - name: apt update
+      ansible.builtin.apt:
+        update_cache: yes
