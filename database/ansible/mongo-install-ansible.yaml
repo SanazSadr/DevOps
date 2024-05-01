@@ -1,6 +1,6 @@
 ---
 - name: Install MongoDB
-  hosts: all
+  hosts: db
   become: yes
   tasks:
     - name: Update apt cache
