@@ -1,2 +1,55 @@
 ---
 # tasks file for redis
+- name: Install redis
+  apt:
+    name: redis-server
+    state: present
+    update_cache: yes
+
+- name: set permission for user 'redis'
+  file:
+    path: /etc/redis/sentinel.conf
+    owner: redis
+    group: redis
+    mode: '0644'
+    
+- name: configure redis-server
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^bind 127\.0\.0\.1'
+    line: "bind {{ private_ip }} 127.0.0.1"
+
+- name: configure redis-server
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^# protected-mode'
+    line: "protected-mode no"
+
+- name: configure redis-server
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^protected-mode'
+    line: "protected-mode no"
+
+- name: find master private ip
+  set_fact:
+    master_ip: "{{ hostvars[item].private_ip }}"
+  when: "'role' in hostvars[item] and hostvars[item].role == 'master'"
+  loop: "{{ groups['all'] }}"
+
+- name: show master ip
+  debug:
+    msg: "{{ master_ip }}"
+
+- name: configure redis-server
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^slaveof'
+    line: "slaveof {{ master_ip }} 6379"
+  when: role == 'slave'
+
+- name: restart redis server
+  service:
+    name: redis-server
+    state: restarted
+    enabled: yes
