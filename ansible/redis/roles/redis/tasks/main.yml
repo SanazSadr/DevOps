@@ -8,24 +8,24 @@
 
 - name: set permission for user 'redis'
   file:
-    path: /etc/redis/sentinel.conf
+    path: /etc/redis/redis.conf
     owner: redis
     group: redis
     mode: '0644'
     
-- name: configure redis-server
+- name: configure redis-server - set bind
   lineinfile:
     path: /etc/redis/redis.conf
     regexp: '^bind 127\.0\.0\.1'
     line: "bind {{ private_ip }} 127.0.0.1"
 
-- name: configure redis-server
+- name: configure redis-server - set protected-mode
   lineinfile:
     path: /etc/redis/redis.conf
     regexp: '^# protected-mode'
     line: "protected-mode no"
 
-- name: configure redis-server
+- name: configure redis-server - set protected-mode
   lineinfile:
     path: /etc/redis/redis.conf
     regexp: '^protected-mode'
@@ -41,7 +41,7 @@
   debug:
     msg: "{{ master_ip }}"
 
-- name: configure redis-server
+- name: configure redis-server - set slaveof
   lineinfile:
     path: /etc/redis/redis.conf
     regexp: '^slaveof'

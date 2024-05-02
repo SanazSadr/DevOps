@@ -234,7 +234,7 @@ vim /etc/redis/sentinel.conf
 # bind 127.0.0.1 192.168.1.1
 bind 192.168.211.101 127.0.0.1
 protected-mode no
-sentinel monitor mymaster 192.168.211.101 6279 2
+sentinel monitor mymaster 192.168.211.101 6379 2
 sentinel down-after-milliseconds mymaster 5000
 sentinel failover-timeout mymaster 7000
 ###
@@ -267,7 +267,7 @@ vim /etc/redis/sentinel.conf
 # bind 127.0.0.1 192.168.1.1
 bind 192.168.211.102 127.0.0.1
 protected-mode no
-sentinel monitor mymaster 192.168.211.101 6279 2
+sentinel monitor mymaster 192.168.211.101 6379 2
 sentinel down-after-milliseconds mymaster 5000
 sentinel failover-timeout mymaster 7000
 ###
@@ -309,7 +309,7 @@ vim /etc/redis/sentinel.conf
 # bind 127.0.0.1 192.168.1.1
 bind 192.168.211.103 127.0.0.1
 protected-mode no
-sentinel monitor mymaster 192.168.211.101 6279 2
+sentinel monitor mymaster 192.168.211.101 6379 2
 sentinel down-after-milliseconds mymaster 5000
 sentinel failover-timeout mymaster 7000
 ###

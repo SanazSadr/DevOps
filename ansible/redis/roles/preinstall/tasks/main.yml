@@ -3,13 +3,13 @@
 - name: Set hostname
   command: hostnamectl set-hostname {{ inventory_hostname }}
 
-- name: Remove symlink resolve.conf | Comment this task if you live in outside of Iran :)
+- name: Remove symlink resolve.conf
   file:
     path: "/etc/resolv.conf"
     state: absent
   ignore_errors: true
 
-- name: Configure resolv.conf | Comment this task if you live in outside of Iran :)
+- name: Configure resolv.conf
   template:
     src: "resolv.conf.j2"
     dest: "/etc/resolv.conf"
