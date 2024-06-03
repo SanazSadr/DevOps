@@ -1,0 +1,15 @@
+# General
+install_ansible_modules: "true"
+disable_transparent_huge_pages: "true"
+setup_interface: "false"
+
+# SSH
+ssh_port: 2222
+
+# DNS
+DNS1: 10.202.10.202
+DNS2: 10.202.10.102
+
+# Sanction
+use_iran: "true" # change it to "false" if you are out of Iran :)
+

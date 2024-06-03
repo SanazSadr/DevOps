@@ -1,0 +1,7 @@
+---
+# handlers file for haproxy
+- name: Reload haproxy
+  service:
+    name: haproxy
+    state: restarted
+    enabled: yes

@@ -1,0 +1,39 @@
+---
+# tasks file for preinstall
+- name: Set hostname
+  command: hostnamectl set-hostname {{ inventory_hostname }}
+
+- name: Remove symlink resolve.conf
+  file:
+    path: "/etc/resolv.conf"
+    state: absent
+  ignore_errors: true
+
+- name: Configure resolv.conf
+  template:
+    src: "resolv.conf.j2"
+    dest: "/etc/resolv.conf"
+    mode: "0644"
+  when: use_iran == "true"
+
+- name: Add hostname
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: "127.0.0.1 {{ inventory_hostname }} localhost"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install packages
+  apt:
+    update_cache: yes
+    name: 
+      - vim
+      - sudo
+      - wget
+      - curl
+      - telnet
+      - nload
+      - htop
+    state: present
