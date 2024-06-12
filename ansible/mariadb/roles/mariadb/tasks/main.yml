@@ -1,7 +1,0 @@
----
-# tasks file for mariadb
-- name: Install mariadb
-  apt:
-    name: mariadb-server
-    state: present
-    update_cache: yes
